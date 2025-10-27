@@ -22,7 +22,7 @@ model_version = {
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Run the evaluation program.")
+    parser = argparse.ArgumentParser(description="Run Step 3. Labeling")
     parser.add_argument("--save_interval", type=int, default=20)
     parser.add_argument("--dataset_name", type=str, default="REF", help="REF, TEST, AIME, AHSME, AMC")
     parser.add_argument("--data_dir", type=str, default="data", help="dataset dir")
