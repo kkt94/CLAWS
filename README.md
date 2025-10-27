@@ -29,19 +29,34 @@ pip install -r requirements.txt
 ```
 
 ## 💻 Running CLAWS
-### Reference Set Construction
+- dataset_name: REF / TEST / AMC / AIME / AHSME
+### Step 1. Generation & Step 2. Feature Extraction
 ```
-python src/generation.py --model_name "model_name" --n_generation 20 --dataset_name REF
-python src/evaluate.py --generation_model_name "model_name" --dataset_name REF
+python src/generation_and_feature_extraction.py --model_name "generation_model_name" --n_generation 20 --dataset_name REF
+python src/generation_and_feature_extraction.py --model_name "generation_model_name" --n_generation 3 --dataset_name TEST
 ```
-### TEST & Extended TEST set Construction
-- dataset_name: TEST / AMC / AIME / AHSME
+### Step 3. Labeling
 ```
-python src/generation.py --model_name "model_name" --n_generation 3 --dataset_name TEST
-python src/evaluate.py --generation_model_name "model_name" --dataset_name TEST
+python src/labeling.py --generation_model_name "generation_model_name" --dataset_name REF
+python src/labeling.py --generation_model_name "generation_model_name" --dataset_name TEST
+```
+### Step 4. Evaluation
+```
+python src/evaluation_strategy/MLP.py --model_name "generation_model_name" --dataset_name TEST
+python src/evaluation_strategy/TabM.py --model_name "generation_model_name" --dataset_name TEST
+python src/evaluation_strategy/prototype.py --model_name "generation_model_name" --dataset_name TEST
+python src/evaluation_strategy/XGBoost.py --model_name "generation_model_name" --dataset_name TEST
 ```
 
 ## 📚 Citation
 ```
-
+@misc{kim2025clawscreativitydetection,
+      title={CLAWS:Creativity detection for LLM-generated solutions using Attention Window of Sections}, 
+      author={Keuntae Kim and Eunhye Jeong and Sehyeon Lee and Seohee Yoon and Yong Suk Choi},
+      year={2025},
+      eprint={2510.17921},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2510.17921}, 
+}
 ```
